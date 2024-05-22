@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/login.css" />
+    <link rel="icon" type="image/x-icon" href="/sq.PNG">
+    <!-- <link rel="stylesheet" href="home.css"> -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <title>Login</title>
+</head>
+<body >
+    <nav>
+        <div class="nav__bar">
+          <div class="nav__logo"><a href="/">StarQuest</a></div>
+          <ul class="nav__links">
+            <li class="link"><a href="">Home</a></li>
+            <li class="link"><a href="">Booking</a></li>
+            <li class="link"><a href="">Destinations</a></li>
+            
+            <li class="link"><a href="">Gallery</a></li>
+            <li class="link"><a href="">About Us</a></li>
+            
+
+            <li class="link"><a href="">Contact</a></li>
+            
+            <li class="link"><a href="/">Login</a></li>
+          </ul>
+        </div>
+
+      </nav>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all anchor tags in the navigation
+            const navLinks = document.querySelectorAll(".nav__links a");
+    
+            // Loop through each anchor tag
+            navLinks.forEach(function(link) {
+                // Prevent the default action when clicked
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();
+                });
+            });
+        });
+    </script>
+        <section class = "bg">
+        <!-- <div class="section__container header__container ">  -->
+          <div class="wrapper">
+            <!-- <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span> -->
+            <a href="/" class="icon-close"><ion-icon name="close-outline"></ion-icon></a>
+
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" required id="email" name="email" autocomplete="off">
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" required name="password" autocomplete="off">
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forget">
+                        <label><input type="checkbox">Remember Me</label>
+                        <a href="#">Forget Password</a>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="/signup" class="register-link">Register</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+            <!-- registration -->
+            
+        <!-- </div>  -->
+    <!-- </header> -->
+
+    
+  </section>
+
+  
+      <script src="login.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

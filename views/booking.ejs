@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="/sq.PNG">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Booking Form</title>
+
+	
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/bootstrapbook.min.css" />
+	<link type="text/css" rel="stylesheet" href="/bookingnew.css" />
+	<!-- <link type="text/css" rel="stylesheet" href="/navbar.css" /> -->
+	
+</head>
+
+<body style="background-image: url(/backgroundmain.jpg);">
+
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<div class="form-header">
+							<h1>Make your reservation</h1>
+						</div>
+						<form action="/booking" method="post">
+							<div class="form-group">
+								<select  class="form-control" id="tourName" onchange="updateDuration()" name="tourname" required>
+									<option value="" selected hidden>Select Tour</option>
+									<option value="spiti">Spiti Valley</option>
+									<option value="pangong">Pangong Tso</option>
+									<option value="sonmarg">Sonmarg</option>
+									<option value="lachen">Lachen</option>
+									<option value="neil">Neil Island</option>
+								</select>
+								<span class="form-label">Tour Name</span>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input class="form-control" type="date" name="tourdate" required>
+										<span class="form-label">Tour Date</span>
+									</div>
+
+									<div class="form-group">
+										<input class="form-control" type="number" name="duration" placeholder="Duration" id="duration" required  readonly>
+										<span class="form-label">Duration</span>
+									</div>
+								</div>
+								
+								
+								<div class="col-md-4">
+									<div class="form-group">
+										<select class="form-control" name="people" id= "people" onchange="calculatePrice()" required>
+											<option value="" selected hidden>No of People</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">People</span>
+									</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<input class="form-control" type="name" name= "name" placeholder="Enter your Full Name">
+									<span class="form-label">Full Name</span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input class="form-control" type="email" name="email" placeholder="Enter your Email">
+									<span class="form-label">Email</span>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input class="form-control" type="tel" id= "phoneInput" name="phone" placeholder="Enter you Phone">
+									<span class="form-label" id="phoneInputLabel">Phone</span>
+								</div>
+
+								
+
+							</div>
+							<div class="form-group col-md-6">
+								<input class="form-control" type="text" id="totalPrice" name="totalprice" placeholder="Total Price" readonly>
+								<span class="form-label"> Total Price ($)</span>
+							</div>
+							<div class="form-btn">
+								<button class="submit-btn" name="booking">Book Now</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="jquery.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+            const phoneInput = document.getElementById("phoneInput");
+            const phoneInputLabel = document.getElementById("phoneInputLabel");
+
+            phoneInput.addEventListener("input", function() {
+                if (phoneInput.value.trim() !== "") {
+                    phoneInputLabel.classList.add("active");
+                } else {
+                    phoneInputLabel.classList.remove("active");
+                }
+            });
+        });
+
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+
+		 function updateDuration() {
+            var tourName = document.getElementById("tourName").value;
+            var durationInput = document.getElementById("duration");
+
+              // You can define the duration for each tour or fetch it from the server based on the selected tour
+              // For demonstration, let's set default durations for Tour A and Tour B
+              if (tourName === "spiti") {
+                  durationInput.value = "4"; // Duration for Tour A in hours
+              } else if (tourName === "pangong") {
+                  durationInput.value = "3"; // Duration for Tour B in hours
+              } else if (tourName === "lachen") {
+                  durationInput.value = "2"; // Duration for Tour B in hours
+              } else if (tourName === "neil") {
+                  durationInput.value = "1"; // Duration for Tour B in hours
+              } else if (tourName === "sonmarg") {
+                  durationInput.value = "4"; // Duration for Tour B in hours
+              } else {
+                  durationInput.value = ""; // Reset duration if no tour is selected
+              }
+			  calculatePrice();
+          }
+
+		  function calculatePrice() {
+            var tourName = document.getElementById("tourName").value;
+            var people = parseInt(document.getElementById("people").value);
+            var totalPriceInput = document.getElementById("totalPrice");
+            //var basePrice = 100; // Base price per person
+            var tourPrice = 0;
+
+            // Define prices for each tour (you can adjust these as needed)
+            if (tourName === "spiti") {
+                tourPrice = 20000; // Price for Tour A
+            } else if (tourName === "pangong") {
+                tourPrice = 25000; // Price for Tour B
+            } else if (tourName === "lachen") {
+                tourPrice = 15000; // Price for Tour C
+            } else if (tourName === "neil") {
+                tourPrice = 18000; // Price for Tour D
+            } else if (tourName === "sonmarg") {
+                tourPrice = 22000; // Price for Tour E
+            }
+
+            var totalPrice =  tourPrice * people;
+            totalPriceInput.value = totalPrice;
+
+			
+        }
+		
+
+		
+	</script>
+
+</body>
+
+</html>
